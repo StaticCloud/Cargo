@@ -5,7 +5,7 @@
 - [Features](#Features)
 - [Installation](#Installation)
 - Usage
-- Architecture
+- [Architecture](#Architecture)
 - License
 
 ## About
