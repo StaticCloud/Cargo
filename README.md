@@ -2,20 +2,26 @@
 
 ## Table of Contents
 - [About](#About)
+- [Features](#Features)
 - [Installation](#Installation)
 - Usage
-- Features
 - Architecture
 - License
 
 ## About
 A CLI tool for managing your Docker images.
 
+## Features
+- Seamlessley generate customized Docker images using existing templates or from scratch.
+- Modify and manage images from the CLI.
+- Pull from Docker image registries of your choice.
+- Push images to accessible Docker image registries.
+
 ## Installation
 
 ### Prerequisite Installations
-[.NET 9.0](https://dotnet.microsoft.com/en-us/download)  
-[Git](https://git-scm.com/downloads)
+- [.NET 9.0](https://dotnet.microsoft.com/en-us/download)  
+- [Git](https://git-scm.com/downloads)
 
 ### Cloning Instructions
 
