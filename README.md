@@ -47,3 +47,15 @@ git@github.com:StaticCloud/Cargo.git
 > dotnet restore
 > dotnet build
 ```
+
+# Architecture
+
+## File Structure
+```
+src/
+|-- menus/
+|   |-- MainMenu.cs
+|-- utils/
+|   |-- RenderLogo.cs
+|-- Program.cs
+```
