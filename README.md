@@ -54,6 +54,8 @@ git@github.com:StaticCloud/Cargo.git
 ## File Structure
 ```
 src/
+|-- api/
+|   |-- Connection.cs
 |-- menus/
 |   |-- MainMenu.cs
 |-- utils/
