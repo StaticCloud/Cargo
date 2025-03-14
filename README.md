@@ -20,8 +20,9 @@ A CLI tool for managing your Docker images.
 ## Installation
 
 ### Prerequisite Installations
-- [.NET 9.0](https://dotnet.microsoft.com/en-us/download)  
 - [Git](https://git-scm.com/downloads)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [.NET 9.0](https://dotnet.microsoft.com/en-us/download)
 
 ### Cloning Instructions
 
