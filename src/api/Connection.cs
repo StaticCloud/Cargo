@@ -9,6 +9,20 @@ namespace Cargo.src.api
         public Connection()
         {
             _client = new DockerClientConfiguration().CreateClient();
+
+            try
+            {
+
+                Task ping = _client.System.PingAsync();
+
+                ping.Wait();
+
+                Console.WriteLine(ping.Status);
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
