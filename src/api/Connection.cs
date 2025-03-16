@@ -1,4 +1,5 @@
-﻿using Docker.DotNet;
+﻿using Cargo.src.services;
+using Docker.DotNet;
 using Spectre.Console;
 
 namespace Cargo.src.api
@@ -6,6 +7,8 @@ namespace Cargo.src.api
     internal class Connection
     {
         private DockerClient _client;
+        public Services services { get; }
+        
         public Connection()
         {
             _client = new DockerClientConfiguration().CreateClient();
@@ -29,8 +32,8 @@ namespace Cargo.src.api
                     AnsiConsole.MarkupLine("[red]Connection to the Docker engine could not be established. Please make sure it is running locally on your machine.[/]");
                 }
             });
-        }
 
-        public DockerClient GetClient() => _client;
+            services = new Services(_client);
+        }
     }
 }

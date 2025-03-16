@@ -7,7 +7,7 @@ namespace Cargo.src.menus
     internal class MainMenu
     {
         static Connection connection;
-        static Services services;
+
         public static void Render() 
         {
             AnsiConsole.Write(new FigletText("Cargo").Centered().Color(Color.Blue));
@@ -17,8 +17,7 @@ namespace Cargo.src.menus
             if (choice == "Connect to Docker")
             {
                 connection = new Connection();
-                services = new Services(connection.GetClient());
-                services.imageService.LoadImages();
+                connection.services.imageService.LoadImages();
             }
             
         }
