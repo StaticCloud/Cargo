@@ -56,9 +56,15 @@ git@github.com:StaticCloud/Cargo.git
 src/
 |-- api/
 |   |-- Connection.cs
+|-- interfaces/
+|   |-- IConnection.cs
+|   |-- IService.cs
 |-- menus/
 |   |-- MainMenu.cs
 |-- utils/
 |   |-- RenderLogo.cs
+|-- services/
+|   |-- ImageService.cs
+|   |-- Services.cs
 |-- Program.cs
 ```
