@@ -1,6 +1,7 @@
 ﻿using Cargo.src.menus;
-using Spectre.Console;
 using Cargo.src.api;
+using Docker.DotNet;
+using Cargo.src.services;
 
 namespace Cargo
 {
@@ -9,6 +10,11 @@ namespace Cargo
         static void Main(string[] args)
         {
             MainMenu.Render();
+
+            DockerClient client = new Connection().GetClient();
+            Services services = new Services(client);
+
+            services.imageService.LoadImages();
         }
     }
 }

@@ -1,22 +1,29 @@
-﻿using Cargo.src.services;
+﻿using Cargo.src.interfaces;
+using Cargo.src.services;
 using Docker.DotNet;
 using Spectre.Console;
 
 namespace Cargo.src.api
 {
-    internal class Connection
+    internal class Connection : IConnection
     {
         private DockerClient _client;
-        public Services services { get; }
         
         public Connection()
         {
             _client = new DockerClientConfiguration().CreateClient();
 
+            TestConnection();
+        }
+
+        public DockerClient GetClient() => _client;
+
+        public void TestConnection()
+        {
             AnsiConsole.Status().Start("[blue]Connecting to Docker engine...[/]", ctx => {
                 ctx.Spinner(Spinner.Known.Star);
                 ctx.SpinnerStyle(Style.Parse("blue"));
-                
+
                 try
                 {
                     AnsiConsole.Clear();
@@ -32,8 +39,6 @@ namespace Cargo.src.api
                     AnsiConsole.MarkupLine("[red]Connection to the Docker engine could not be established. Please make sure it is running locally on your machine.[/]");
                 }
             });
-
-            services = new Services(_client);
         }
     }
 }

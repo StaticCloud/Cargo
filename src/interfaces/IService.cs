@@ -1,6 +1,6 @@
 ﻿using Docker.DotNet;
 
-namespace Cargo.src.services
+namespace Cargo.src.interfaces
 {
     interface IService
     {
