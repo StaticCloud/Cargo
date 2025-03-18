@@ -18,8 +18,11 @@ namespace Cargo.src.services
 
         public async void LoadImages()
         {
-            var res = _client.Images.ListImagesAsync(new ImagesListParameters()).Result;
-            AnsiConsole.WriteLine(res.Count);
+            var res = _client.Images.ListImagesAsync(new ImagesListParameters{ All = true }).Result;
+            foreach (var image in res) 
+            {
+                AnsiConsole.WriteLine(image.RepoTags[0]);
+            }
         }
     }
 }

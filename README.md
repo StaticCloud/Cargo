@@ -9,13 +9,12 @@
 - License
 
 ## About
-A CLI tool for managing your Docker images.
+A CLI-based Docker client.
 
 ## Features
-- Seamlessley generate customized Docker images using existing templates or from scratch.
-- Modify and manage images from the CLI.
-- Pull from Docker image registries of your choice.
-- Push images to accessible Docker image registries.
+- Manage images from the CLI.
+- Pull and push Docker images from the Docker daemon.
+- Monitor and modify running Docker containers.
 
 ## Installation
 
