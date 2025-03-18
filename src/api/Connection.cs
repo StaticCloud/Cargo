@@ -5,22 +5,20 @@ using Spectre.Console;
 
 namespace Cargo.src.api
 {
-    internal class Connection : IConnection
+    internal class Connection
     {
-        private DockerClient _client;
+        public DockerClient client { get; }
         
         public Connection()
         {
-            _client = new DockerClientConfiguration().CreateClient();
+            client = new DockerClientConfiguration().CreateClient();
 
             TestConnection();
         }
 
-        public DockerClient GetClient() => _client;
-
         public void TestConnection()
         {
-            AnsiConsole.Status().Start("[blue]Connecting to Docker engine...[/]", ctx => {
+            AnsiConsole.Status().Start("[blue]Connecting to Docker daemon...[/]", ctx => {
                 ctx.Spinner(Spinner.Known.Star);
                 ctx.SpinnerStyle(Style.Parse("blue"));
 
@@ -28,7 +26,7 @@ namespace Cargo.src.api
                 {
                     AnsiConsole.Clear();
 
-                    Task ping = _client.System.PingAsync();
+                    Task ping = client.System.PingAsync();
 
                     ping.Wait();
 

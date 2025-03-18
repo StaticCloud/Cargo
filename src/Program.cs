@@ -11,7 +11,7 @@ namespace Cargo
         {
             MainMenu.Render();
 
-            DockerClient client = new Connection().GetClient();
+            DockerClient client = new Connection().client;
             Services services = new Services(client);
 
             services.imageService.LoadImages();

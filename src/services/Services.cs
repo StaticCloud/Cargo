@@ -4,7 +4,7 @@ namespace Cargo.src.services
 {
     internal class Services
     {
-        public ImageService imageService;
+        public ImageService imageService { get; }
 
         public Services(DockerClient dockerClient) 
         {
