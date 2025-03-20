@@ -1,10 +1,9 @@
-﻿using Cargo.src.api;
-using Cargo.src.services;
+﻿using Cargo.src.interfaces;
 using Spectre.Console;
 
 namespace Cargo.src.menus
 {
-    internal class MainMenu
+    internal class MainMenu : IMenu
     {
 
         public static void Render() 

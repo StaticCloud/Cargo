@@ -1,4 +1,5 @@
-﻿using Cargo.src.interfaces;
+﻿using System.Collections;
+using Cargo.src.interfaces;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 using Spectre.Console;
@@ -16,13 +17,9 @@ namespace Cargo.src.services
             _client = client;
         }
 
-        public async void LoadImages()
+        public Task<IList<ImagesListResponse>> LoadImages()
         {
-            var res = _client.Images.ListImagesAsync(new ImagesListParameters{ All = true }).Result;
-            foreach (var image in res) 
-            {
-                AnsiConsole.WriteLine(image.RepoTags[0]);
-            }
+            return _client.Images.ListImagesAsync(new ImagesListParameters { All = true });
         }
     }
 }
