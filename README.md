@@ -56,12 +56,11 @@ src/
 |-- api/
 |   |-- Connection.cs
 |-- interfaces/
-|   |-- IConnection.cs
+|   |-- IMenu.cs
 |   |-- IService.cs
 |-- menus/
+|   |-- ImageMenu.cs
 |   |-- MainMenu.cs
-|-- utils/
-|   |-- RenderLogo.cs
 |-- services/
 |   |-- ImageService.cs
 |   |-- Services.cs
