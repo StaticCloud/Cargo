@@ -6,7 +6,7 @@ namespace Cargo.src.menus
     internal class MainMenu : IMenu
     {
 
-        public static void Render() 
+        public void Render() 
         {
             AnsiConsole.Write(new FigletText("Cargo").Centered().Color(Color.Blue));
             AnsiConsole.MarkupLine("[white bold]This is still a work in progress. Please visit the [blue][link=https://github.com/StaticCloud/Cargo]GitHub[/][/] page for updates![/]");

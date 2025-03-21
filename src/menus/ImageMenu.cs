@@ -1,16 +1,18 @@
 ﻿using Cargo.src.interfaces;
+using Docker.DotNet.Models;
 using Spectre.Console;
 
 namespace Cargo.src.menus
 {
     internal class ImageMenu : IMenu
     {
-        public static void Render()
-        {
-
+        private IList<ImagesListResponse> _images;
+        public ImageMenu(IList<ImagesListResponse> images) 
+        { 
+            _images = images;
         }
 
-        private Table BuildTable()
+        public void Render()
         {
             Table table = new Table().Title("Docker Images");
 
@@ -19,7 +21,12 @@ namespace Cargo.src.menus
             table.AddColumn("ID");
             table.AddColumn("Name");
 
-            return table;
+            foreach (ImagesListResponse image in _images)
+            {
+                table.AddRow(image.ID, image.RepoTags[0]);
+            }
+
+            AnsiConsole.Write(table);
         }
     }
 }
