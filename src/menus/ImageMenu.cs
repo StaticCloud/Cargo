@@ -15,19 +15,18 @@ namespace Cargo.src.menus
 
         public void Render()
         {
-            Table table = new Table().Title("Docker Images").BorderColor(Color.Blue);
+            string[] choices = new string[_images.Count];
 
-            table.Border = TableBorder.SimpleHeavy;
-
-            table.AddColumn("ID");
-            table.AddColumn("Name");
-
-            foreach (ImagesListResponse image in _images)
-            {
-                table.AddRow(ImageUtils.TrimID(image.ID), ImageUtils.TrimName(image.RepoTags[0]));
+            for (int i = 0; i < _images.Count; i++) 
+            {   
+                choices[i] = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
             }
 
-            AnsiConsole.Write(table);
+            SelectionPrompt<string> prompt = new SelectionPrompt<string>();
+            prompt.AddChoices(choices);
+
+            AnsiConsole.MarkupLine("[underline blue][bold]Docker Images[/][/]");
+            AnsiConsole.Prompt(prompt);
         }
     }
 }

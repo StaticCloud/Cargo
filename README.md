@@ -62,6 +62,8 @@ src/
 |-- services/
 |   |-- ImageService.cs
 |   |-- Services.cs
+|-- utils/
+|   |-- ImageUtils.cs
 |-- Connection.cs
 |-- Program.cs
 ```

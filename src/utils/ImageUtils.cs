@@ -4,7 +4,7 @@
     {
         public static string TrimID(string id)
         {
-            return id.Split(':')[1].Substring(0, 6);
+            return id.Split(':')[1].Substring(0, 12);
         }
 
         public static string TrimName(string name) 
