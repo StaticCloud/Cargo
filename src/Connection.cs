@@ -1,14 +1,12 @@
-﻿using Cargo.src.interfaces;
-using Cargo.src.services;
-using Docker.DotNet;
+﻿using Docker.DotNet;
 using Spectre.Console;
 
-namespace Cargo.src.api
+namespace Cargo.src
 {
     internal class Connection
     {
         public DockerClient client { get; }
-        
+
         public Connection()
         {
             client = new DockerClientConfiguration().CreateClient();
@@ -18,7 +16,8 @@ namespace Cargo.src.api
 
         public void TestConnection()
         {
-            AnsiConsole.Status().Start("[blue]Connecting to Docker daemon...[/]", ctx => {
+            AnsiConsole.Status().Start("[blue]Connecting to Docker daemon...[/]", ctx =>
+            {
                 ctx.Spinner(Spinner.Known.Star);
                 ctx.SpinnerStyle(Style.Parse("blue"));
 
