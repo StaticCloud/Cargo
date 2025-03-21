@@ -53,8 +53,6 @@ git@github.com:StaticCloud/Cargo.git
 ## File Structure
 ```
 src/
-|-- api/
-|   |-- Connection.cs
 |-- interfaces/
 |   |-- IMenu.cs
 |   |-- IService.cs
@@ -64,5 +62,6 @@ src/
 |-- services/
 |   |-- ImageService.cs
 |   |-- Services.cs
+|-- Connection.cs
 |-- Program.cs
 ```

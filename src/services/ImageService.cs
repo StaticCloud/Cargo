@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using Cargo.src.interfaces;
+﻿using Cargo.src.interfaces;
 using Docker.DotNet;
 using Docker.DotNet.Models;
-using Spectre.Console;
 
 namespace Cargo.src.services
 {
