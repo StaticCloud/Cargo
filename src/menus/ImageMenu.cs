@@ -1,4 +1,5 @@
 ﻿using Cargo.src.interfaces;
+using Cargo.src.utils;
 using Docker.DotNet.Models;
 using Spectre.Console;
 
@@ -14,7 +15,7 @@ namespace Cargo.src.menus
 
         public void Render()
         {
-            Table table = new Table().Title("Docker Images");
+            Table table = new Table().Title("Docker Images").BorderColor(Color.Blue);
 
             table.Border = TableBorder.SimpleHeavy;
 
@@ -23,7 +24,7 @@ namespace Cargo.src.menus
 
             foreach (ImagesListResponse image in _images)
             {
-                table.AddRow(image.ID, image.RepoTags[0]);
+                table.AddRow(ImageUtils.TrimID(image.ID), ImageUtils.TrimName(image.RepoTags[0]));
             }
 
             AnsiConsole.Write(table);
