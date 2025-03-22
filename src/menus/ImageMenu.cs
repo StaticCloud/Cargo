@@ -8,25 +8,23 @@ namespace Cargo.src.menus
     internal class ImageMenu : IMenu
     {
         private IList<ImagesListResponse> _images;
+        private string[] _choices;
         public ImageMenu(IList<ImagesListResponse> images) 
         { 
             _images = images;
+            _choices = new string[_images.Count];
+
+            for (int i = 0; i < _images.Count; i++)
+            {
+                _choices[i] = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
+            }
+
+            Render();
         }
 
         public void Render()
         {
-            string[] choices = new string[_images.Count];
-
-            for (int i = 0; i < _images.Count; i++) 
-            {   
-                choices[i] = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
-            }
-
-            SelectionPrompt<string> prompt = new SelectionPrompt<string>();
-            prompt.AddChoices(choices);
-
-            AnsiConsole.MarkupLine("[underline blue][bold]Docker Images[/][/]");
-            AnsiConsole.Prompt(prompt);
+            AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Select an image to modify:").AddChoices(_choices));
         }
     }
 }

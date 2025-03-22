@@ -2,6 +2,6 @@
 {
     internal interface IMenu
     {
-        public abstract void Render();
+        public void Render();
     }
 }

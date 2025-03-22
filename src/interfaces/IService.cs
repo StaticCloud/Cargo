@@ -4,6 +4,6 @@ namespace Cargo.src.interfaces
 {
     interface IService
     {
-        DockerClient Client { get; }
+        public DockerClient Client { get; }
     }
 }
