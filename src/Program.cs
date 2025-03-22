@@ -1,7 +1,4 @@
 ﻿using Cargo.src.menus;
-using Docker.DotNet;
-using Cargo.src.services;
-using Cargo.src;
 
 namespace Cargo
 {
