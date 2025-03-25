@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using Docker.DotNet.Models;
+using Spectre.Console;
 
 namespace Cargo.src.utils
 {
@@ -11,6 +12,25 @@ namespace Cargo.src.utils
             string choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title(message).AddChoices(choices));
 
             options[choice]();
+        }
+
+        public static void ContainerTable(IList<ContainerListResponse> res)
+        {
+            Table table = new Table();
+
+            table.Border = TableBorder.SimpleHeavy;
+
+            table.AddColumn("[blue]ID[/]");
+            table.AddColumn("[blue]Name[/]");
+            table.AddColumn("[blue]Running[/]");
+
+            foreach (ContainerListResponse row in res) 
+            {
+                // Reminder to consolidate ID trimmer in non-image util class
+                table.AddRow(row.ID.Substring(0, 12), row.Names[0].Split('/')[1], row.State);
+            }
+
+            AnsiConsole.Write(table);
         }
     }
 }

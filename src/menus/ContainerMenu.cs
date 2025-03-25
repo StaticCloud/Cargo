@@ -21,7 +21,7 @@ namespace Cargo.src.menus
 
             Choices = new Dictionary<string, Action>
             {
-                { "Manage existing container", () => Console.WriteLine(_services.containerService.LoadContainers(_id).Result.Count) },
+                { "Manage existing container", ManageExistingContainers },
                 { "Create new container", CreateNewContainer }
             };
         }
@@ -37,6 +37,11 @@ namespace Cargo.src.menus
             {
                 Image = _title,
             });
+        }
+
+        private void ManageExistingContainers()
+        {
+            MenuUtils.ContainerTable(_services.containerService.LoadContainers(_id).Result);
         }
     }
 }

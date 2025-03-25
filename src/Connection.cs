@@ -28,8 +28,6 @@ namespace Cargo.src
                     Task ping = client.System.PingAsync();
 
                     ping.Wait();
-
-                    Console.WriteLine(ping.Status);
                 }
                 catch
                 {
