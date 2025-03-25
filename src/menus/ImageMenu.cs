@@ -23,6 +23,8 @@ namespace Cargo.src.menus
             {
                 _payload = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
 
+                // Contemplating if it would be better design wise to use utility classes instead of generating a new menu object for each object
+                // The downside ^^^ is we are working with instance-specific data (image ID and title), and utility classes are more beneficial for stateless scenarios
                 ContainerMenu containerMenu = new ContainerMenu(_payload, _services);
 
                 Choices.Add(_payload, () => containerMenu.Render());

@@ -27,7 +27,7 @@ namespace Cargo.src.menus
 
         public void Render()
         {
-            MenuUtils.Display(Choices, "What would you like to do with this container?");
+            MenuUtils.Display(Choices, $"What would you like to do with {_title}?");
         }
     }
 }
