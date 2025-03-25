@@ -33,10 +33,8 @@ namespace Cargo.src.menus
 
         private void CreateNewContainer()
         {
-            _services.containerService.CreateContainer(new CreateContainerParameters
-            {
-                Image = _title,
-            });
+            _services.containerService.CreateContainer(_title).Wait();
+            ManageExistingContainers();
         }
 
         private void ManageExistingContainers()

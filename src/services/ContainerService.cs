@@ -27,9 +27,17 @@ namespace Cargo.src.services
             });
         }
 
-        public Task<CreateContainerResponse> CreateContainer(CreateContainerParameters config)
+        public Task<CreateContainerResponse> CreateContainer(string name)
         {
-            return _client.Containers.CreateContainerAsync(config);
+            return _client.Containers.CreateContainerAsync(new CreateContainerParameters
+            {
+                Image = name,
+                HostConfig = new HostConfig
+                {
+                    // Subject to change
+                    PublishAllPorts = true
+                }
+            });
         }
     }
 }
