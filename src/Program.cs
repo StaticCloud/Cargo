@@ -7,6 +7,8 @@ namespace Cargo
         static void Main(string[] args)
         {
             MainMenu mainMenu = new MainMenu();
+            
+            mainMenu.Render();
         }
     }
 }

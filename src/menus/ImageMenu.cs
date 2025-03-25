@@ -2,35 +2,36 @@
 using Cargo.src.services;
 using Cargo.src.utils;
 using Docker.DotNet.Models;
-using Spectre.Console;
 
 namespace Cargo.src.menus
 {
     internal class ImageMenu : IMenu
     {
+        public Dictionary<string, Action> Choices { get; init; }
+
+        private string _payload;
         private IList<ImagesListResponse> _images;
-        private string[] _choices;
         private Services _services;
 
         public ImageMenu(Services services) 
         { 
             _services = services;
             _images = _services.imageService.LoadImages().Result;
-            _choices = new string[_images.Count];
+            Choices = new Dictionary<string, Action>();
 
             for (int i = 0; i < _images.Count; i++)
             {
-                _choices[i] = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
-            }
+                _payload = $"{ImageUtils.TrimID(_images[i].ID)} {ImageUtils.TrimName(_images[i].RepoTags[0])}";
 
-            Render();
+                ContainerMenu containerMenu = new ContainerMenu(_payload, _services);
+
+                Choices.Add(_payload, () => containerMenu.Render());
+            }
         }
 
         public void Render()
         {
-            string choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Select an image to modify:").AddChoices(_choices));
-
-            new ContainerMenu(choice, _services);
+            MenuUtils.Display(Choices, "What would you like to do with this image?");
         }
     }
 }

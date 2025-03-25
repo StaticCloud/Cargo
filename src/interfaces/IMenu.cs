@@ -2,6 +2,7 @@
 {
     internal interface IMenu
     {
-        public void Render();
+        public Dictionary<string, Action> Choices { get; init; }
+        public abstract void Render();
     }
 }

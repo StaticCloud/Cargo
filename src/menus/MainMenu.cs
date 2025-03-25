@@ -1,41 +1,31 @@
-﻿using Cargo.src.interfaces;
-using Cargo.src.services;
+﻿using Cargo.src.services;
+using Cargo.src.utils;
 using Docker.DotNet;
 using Spectre.Console;
 
 namespace Cargo.src.menus
 {
-    internal class MainMenu : IMenu
+    internal class MainMenu
     {
-        private string[] _choices;
-        private ImageMenu _imageMenu;
+        public Dictionary<string, Action> Choices { get; init; }
 
         private DockerClient _client;
         private Services _services;
 
         public MainMenu() 
         {
-            _choices = ["Connect to the Docker daemon", "Quit"];
+            Choices = new Dictionary<string, Action>
+            {
+                { "Connect to Docker daemon", EstablishConnection },
+                { "Exit", () => Environment.Exit(0) }
+            };
 
-            Render();
+            AnsiConsole.Write(new FigletText("Cargo").Color(Color.Blue));
         }
 
-        public void Render() 
+        public void Render()
         {
-            AnsiConsole.Write(new FigletText("Cargo").Color(Color.Blue));
-            AnsiConsole.MarkupLine("[white bold]This is still a work in progress. Please visit the [blue][link=https://github.com/StaticCloud/Cargo]GitHub[/][/] page for updates![/]");
-            
-            string choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(_choices));
-
-            switch (choice) 
-            {
-                case "Connect to the Docker daemon":
-                    EstablishConnection();
-                    break;
-                default:
-                    Environment.Exit(0);
-                    break;
-            }
+            MenuUtils.Display(Choices);
         }
 
         public void EstablishConnection()
@@ -47,7 +37,9 @@ namespace Cargo.src.menus
             _services = new Services(_client);
 
             // Inject services object for interfacing with Docker daemon
-            _imageMenu = new ImageMenu(_services);
+            ImageMenu imageMenu = new ImageMenu(_services);
+
+            imageMenu.Render();
         }
     }
 }
