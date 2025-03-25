@@ -26,5 +26,10 @@ namespace Cargo.src.services
                 }
             });
         }
+
+        public Task<CreateContainerResponse> CreateContainer(CreateContainerParameters config)
+        {
+            return _client.Containers.CreateContainerAsync(config);
+        }
     }
 }

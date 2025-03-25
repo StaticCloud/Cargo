@@ -1,6 +1,7 @@
 ﻿using Cargo.src.interfaces;
 using Cargo.src.services;
 using Cargo.src.utils;
+using Docker.DotNet.Models;
 
 namespace Cargo.src.menus
 {
@@ -10,7 +11,6 @@ namespace Cargo.src.menus
 
         private string _title;
         private string _id;
-        private string[] _choices;
         private Services _services;
 
         public ContainerMenu(string image, Services services) 
@@ -21,13 +21,22 @@ namespace Cargo.src.menus
 
             Choices = new Dictionary<string, Action>
             {
-                { "Manage existing container", () => Console.WriteLine(_services.containerService.LoadContainers(_id).Result.Count) }
+                { "Manage existing container", () => Console.WriteLine(_services.containerService.LoadContainers(_id).Result.Count) },
+                { "Create new container", CreateNewContainer }
             };
         }
 
         public void Render()
         {
             MenuUtils.Display(Choices, $"What would you like to do with {_title}?");
+        }
+
+        private void CreateNewContainer()
+        {
+            _services.containerService.CreateContainer(new CreateContainerParameters
+            {
+                Image = _title,
+            });
         }
     }
 }
