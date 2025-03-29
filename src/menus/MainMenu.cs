@@ -7,7 +7,7 @@ namespace Cargo.src.menus
 {
     internal class MainMenu
     {
-        public Dictionary<string, Action> Choices { get; init; }
+        public Dictionary<string, Action> Choices { get; }
 
         private DockerClient _client;
         private Services _services;

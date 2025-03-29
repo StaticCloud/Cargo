@@ -7,7 +7,7 @@ namespace Cargo.src.menus
 {
     internal class ImageMenu : IMenu
     {
-        public Dictionary<string, Action> Choices { get; init; }
+        public Dictionary<string, Action> Choices { get; set; }
 
         private string _payload;
         private IList<ImagesListResponse> _images;

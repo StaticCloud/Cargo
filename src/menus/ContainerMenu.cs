@@ -2,16 +2,18 @@
 using Cargo.src.services;
 using Cargo.src.utils;
 using Docker.DotNet.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Cargo.src.menus
 {
     internal class ContainerMenu : IMenu
     {
-        public Dictionary<string, Action> Choices { get; init; }
+        public Dictionary<string, Action> Choices { get; set; }
 
         private string _title;
         private string _id;
         private Services _services;
+        private IList<ContainerListResponse> _containers;
 
         public ContainerMenu(string image, Services services) 
         {
@@ -39,7 +41,30 @@ namespace Cargo.src.menus
 
         private void ManageExistingContainers()
         {
-            MenuUtils.ContainerTable(_services.containerService.LoadContainers(_id).Result);
+            _containers = _services.containerService.LoadContainers(_id).Result;
+            MenuUtils.ContainerTable(_containers);
+
+            Choices = new Dictionary<string, Action>
+            {
+                { "Start Container", StartContainer },
+                { "Stop Container", () => { } }
+            };
+
+            MenuUtils.Display(Choices);
+        }
+
+        private void StartContainer()
+        {
+            for (int i = 0; i < _containers.Count; i++)
+            {
+                string payload = $"Temp";
+
+                Choices.Clear();
+
+                Choices.Add(payload, () => { });
+
+                MenuUtils.Display(Choices);
+            }
         }
     }
 }
