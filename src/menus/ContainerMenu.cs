@@ -3,7 +3,6 @@ using Cargo.src.services;
 using Cargo.src.utils;
 using Docker.DotNet.Models;
 using Spectre.Console;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Cargo.src.menus
 {
@@ -21,16 +20,19 @@ namespace Cargo.src.menus
             _title = image.Split(' ')[1];
             _id = image.Split(' ')[0];
             _services = services;
-
-            Choices = new Dictionary<string, Action>
-            {
-                { "Manage existing container", ManageExistingContainers },
-                { "Create new container", CreateNewContainer }
-            };
         }
 
         public void Render()
         {
+            AnsiConsole.Clear();
+
+            Choices = new Dictionary<string, Action>
+            {
+                { "Manage existing container", ManageExistingContainers },
+                { "Create new container", CreateNewContainer },
+                { "Cancel", () => new ImageMenu(_services).Render() }
+            };
+
             MenuUtils.Display(Choices, $"What would you like to do with {_title}?");
         }
 
@@ -62,7 +64,8 @@ namespace Cargo.src.menus
             Choices = new Dictionary<string, Action>
             {
                 { "Start Container", StartContainers },
-                { "Stop Container",  StopContainers }
+                { "Stop Container",  StopContainers },
+                { "Back", Render }
             };
 
             MenuUtils.Display(Choices);
@@ -70,11 +73,11 @@ namespace Cargo.src.menus
 
         private void StartContainers()
         {
-            for (int i = 0; i < _containers.Count; i++)
+            foreach (ContainerListResponse container in _containers)
             {  
                 Choices.Clear();
 
-                Choices.Add(_containers[i].ImageID, () => StartContainer(_containers[i].ID));
+                Choices.Add(container.Names[0].Split('/')[1], () => StartContainer(container.ID));
 
                 MenuUtils.Display(Choices);
             }
@@ -82,11 +85,11 @@ namespace Cargo.src.menus
 
         private void StopContainers()
         {
-            for (int i = 0; i < _containers.Count; i++)
+            foreach (ContainerListResponse container in _containers)
             {
                 Choices.Clear();
 
-                Choices.Add(_containers[i].ImageID, () => StopContainer(_containers[i].ID));
+                Choices.Add(container.Names[0].Split('/')[1], () => StopContainer(container.ID));
 
                 MenuUtils.Display(Choices);
             }

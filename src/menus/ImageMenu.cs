@@ -33,7 +33,7 @@ namespace Cargo.src.menus
 
         public void Render()
         {
-            MenuUtils.Display(Choices, "What would you like to do with this image?");
+            MenuUtils.Display(Choices, "Which image would you like to manage?");
         }
     }
 }

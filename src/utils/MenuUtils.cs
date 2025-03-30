@@ -27,7 +27,9 @@ namespace Cargo.src.utils
             foreach (ContainerListResponse row in res) 
             {
                 // Reminder to consolidate ID trimmer in non-image util class
-                table.AddRow(row.ID.Substring(0, 12), row.Names[0].Split('/')[1], row.State);
+                string color = row.State == "running" ? "Green" : "White";
+
+                table.AddRow($"{row.ID.Substring(0, 12)}", $"{row.Names[0].Split('/')[1]}", $"[{color}]{row.State}[/]");
             }
 
             AnsiConsole.Write(table);
