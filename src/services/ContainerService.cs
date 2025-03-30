@@ -39,5 +39,15 @@ namespace Cargo.src.services
                 }
             });
         }
+
+        public Task<bool> StartContainer(string id) 
+        {
+            return _client.Containers.StartContainerAsync(id, new ContainerStartParameters());
+        }
+
+        public Task<bool> StopContainer(string id)
+        {
+            return _client.Containers.StopContainerAsync(id, new ContainerStopParameters());
+        }
     }
 }

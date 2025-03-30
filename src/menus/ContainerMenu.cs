@@ -2,6 +2,7 @@
 using Cargo.src.services;
 using Cargo.src.utils;
 using Docker.DotNet.Models;
+using Spectre.Console;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Cargo.src.menus
@@ -39,29 +40,53 @@ namespace Cargo.src.menus
             ManageExistingContainers();
         }
 
+        private void StartContainer(string id)
+        {
+            _services.containerService.StartContainer(id).Wait();
+            ManageExistingContainers();
+        }
+
+        private void StopContainer(string id)
+        {
+            _services.containerService.StopContainer(id).Wait();
+            ManageExistingContainers();
+        }
+
         private void ManageExistingContainers()
         {
+            AnsiConsole.Clear();
+
             _containers = _services.containerService.LoadContainers(_id).Result;
             MenuUtils.ContainerTable(_containers);
 
             Choices = new Dictionary<string, Action>
             {
-                { "Start Container", StartContainer },
-                { "Stop Container", () => { } }
+                { "Start Container", StartContainers },
+                { "Stop Container",  StopContainers }
             };
 
             MenuUtils.Display(Choices);
         }
 
-        private void StartContainer()
+        private void StartContainers()
+        {
+            for (int i = 0; i < _containers.Count; i++)
+            {  
+                Choices.Clear();
+
+                Choices.Add(_containers[i].ImageID, () => StartContainer(_containers[i].ID));
+
+                MenuUtils.Display(Choices);
+            }
+        }
+
+        private void StopContainers()
         {
             for (int i = 0; i < _containers.Count; i++)
             {
-                string payload = $"Temp";
-
                 Choices.Clear();
 
-                Choices.Add(payload, () => { });
+                Choices.Add(_containers[i].ImageID, () => StopContainer(_containers[i].ID));
 
                 MenuUtils.Display(Choices);
             }
