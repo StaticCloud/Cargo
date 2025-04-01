@@ -1,20 +1,20 @@
 # Cargo
 
+[![Licence](https://img.shields.io/github/license/staticcloud/cargo?style=for-the-badge)](./LICENSE)
+
 ## Table of Contents
 - [About](#About)
 - [Features](#Features)
 - [Installation](#Installation)
-- Usage
 - [Architecture](#Architecture)
-- License
 
 ## About
 A CLI-based Docker client.
 
 ## Features
-- Manage images from the CLI.
-- Pull and push Docker images from the Docker daemon.
-- Monitor and modify running Docker containers.
+- Manage images and containers from a CLI-based menu.
+- Connect to the Docker daemon to view your images.
+- Manage containers categorized by base images.
 
 ## Installation
 
@@ -57,9 +57,11 @@ src/
 |   |-- IMenu.cs
 |   |-- IService.cs
 |-- menus/
+|   |-- ContainerMenu.cs
 |   |-- ImageMenu.cs
 |   |-- MainMenu.cs
 |-- services/
+|   |-- ContainerService.cs
 |   |-- ImageService.cs
 |   |-- Services.cs
 |-- utils/
