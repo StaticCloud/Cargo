@@ -27,7 +27,7 @@ namespace Cargo.src.menus
                 // The downside ^^^ is we are working with instance-specific data (image ID and title), and utility classes are more beneficial for stateless scenarios
                 ContainerMenu containerMenu = new ContainerMenu(_payload, _services);
 
-                Choices.Add(_payload, () => containerMenu.Render());
+                Choices.Add(_payload, containerMenu.Render);
             }
         }
 

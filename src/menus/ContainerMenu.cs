@@ -73,26 +73,26 @@ namespace Cargo.src.menus
 
         private void StartContainers()
         {
+            Choices.Clear();
+
             foreach (ContainerListResponse container in _containers)
             {  
-                Choices.Clear();
-
                 Choices.Add(container.Names[0].Split('/')[1], () => StartContainer(container.ID));
-
-                MenuUtils.Display(Choices);
             }
+
+            MenuUtils.Display(Choices);
         }
 
         private void StopContainers()
         {
+            Choices.Clear();
+
             foreach (ContainerListResponse container in _containers)
             {
-                Choices.Clear();
-
                 Choices.Add(container.Names[0].Split('/')[1], () => StopContainer(container.ID));
-
-                MenuUtils.Display(Choices);
             }
+
+            MenuUtils.Display(Choices);
         }
     }
 }
